@@ -89,7 +89,7 @@ fastfish-lite 作为 **OpenClaw Skill** 使用：将 `openclaw-skill/` 目录安
 
 ## 联系方式
 
-商业版咨询、技术交流、合作洽谈，欢迎添加微信（半日 · 山东济南）：
+商业版咨询、技术交流、合作洽谈，欢迎添加微信（kuaixiaoyu2024）：
 
 <img src="assets/contact.png" width="200" alt="微信二维码" />
 
