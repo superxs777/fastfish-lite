@@ -1,0 +1,80 @@
+/* 商务风格：正式、稳重，适合企业/资讯号 */
+
+/* H1 居中大标题 */
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-align: center;
+    margin: 24px 0 20px;
+    line-height: 1.5;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #1890ff;
+}
+
+/* 段落标题 h3：块状带底色 */
+h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 20px 0 12px;
+    padding: 10px 14px;
+    background-color: #f0f7ff;
+    border-left: 4px solid #1890ff;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+}
+
+/* 段落：浅底+边框 */
+p {
+    margin: 12px 0;
+    padding: 12px 16px;
+    line-height: 1.8;
+    color: #333;
+    background-color: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+/* H2 标题优化 */
+h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+    border-left: 4px solid #1890ff;
+    padding-left: 12px;
+}
+
+/* 引用块优化 */
+blockquote {
+    margin: 16px 0;
+    padding: 12px 16px;
+    background-color: #f5f5f5;
+    border-left: 4px solid #1890ff;
+    color: #666;
+    font-style: normal;
+    line-height: 1.6;
+}
+
+/* 图片圆角 */
+img {
+    border-radius: 4px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 16px 0;
+}
+
+/* 列表样式 */
+ul, ol {
+    margin: 12px 0;
+    padding-left: 24px;
+    line-height: 1.8;
+}
+
+li {
+    margin: 6px 0;
+}

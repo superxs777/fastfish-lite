@@ -1,0 +1,99 @@
+/* 青玉 - 借鉴 typora-theme-lapis，适配公众号 */
+
+/* H1 居中大标题 */
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-color);
+    text-align: center;
+    margin: 24px 0 20px;
+    line-height: 1.5;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+:root {
+    --primary-color: #4870ac;
+    --text-color: #40464f;
+    --border-color: #e3e8f0;
+    --quote-bg: #f6f8fa;
+    --quote-border: #4870ac;
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    margin: 28px 0 16px;
+    padding: 10px 14px;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    line-height: 1.5;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin: 20px 0 12px;
+    padding: 10px 14px;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    line-height: 1.5;
+}
+
+blockquote {
+    margin: 20px 0;
+    padding: 16px 20px;
+    background-color: var(--quote-bg);
+    border-left: 4px solid var(--quote-border);
+    color: #555;
+    font-style: normal;
+    line-height: 1.7;
+    border-radius: 0 4px 4px 0;
+}
+
+p {
+    margin: 12px 0;
+    padding: 12px 16px;
+    line-height: 2;
+    color: var(--text-color);
+    background-color: #fafbfc;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+img {
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px 0;
+}
+
+ul, ol {
+    margin: 16px 0;
+    padding-left: 28px;
+    line-height: 2;
+}
+
+li {
+    margin: 8px 0;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+strong {
+    font-weight: 600;
+}
+
+code {
+    background-color: var(--quote-bg);
+    color: var(--primary-color);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9em;
+}

@@ -1,0 +1,128 @@
+/* phycat-mauve 主题（淡紫）- 适配微信公众号格式 */
+
+:root {
+    --primary-color: #a855f7;
+    --text-color: #1f2937;
+    --bg-color: #ffffff;
+    --border-color: #e5e7eb;
+    --quote-bg: #faf5ff;
+    --quote-border: #a855f7;
+}
+
+/* H1 居中大标题 */
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-color);
+    text-align: center;
+    margin: 24px 0 20px;
+    line-height: 1.5;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    line-height: 1.4;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 20px 0 12px;
+    padding: 10px 14px;
+    background-color: var(--quote-bg);
+    border-left: 4px solid var(--quote-border);
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+}
+
+blockquote {
+    margin: 20px 0;
+    padding: 16px 20px;
+    background-color: var(--quote-bg);
+    border-left: 4px solid var(--quote-border);
+    color: #555;
+    font-style: normal;
+    line-height: 1.7;
+    border-radius: 0 4px 4px 0;
+}
+
+img {
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(168, 85, 247, 0.15);
+}
+
+p {
+    margin: 12px 0;
+    padding: 12px 16px;
+    line-height: 2;
+    color: var(--text-color);
+    background-color: #fafafa;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+ul, ol {
+    margin: 16px 0;
+    padding-left: 28px;
+    line-height: 2;
+}
+
+li {
+    margin: 8px 0;
+    color: var(--text-color);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+strong {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+em {
+    font-style: italic;
+    color: var(--text-color);
+}
+
+code {
+    background-color: #f3f4f6;
+    color: var(--primary-color);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+pre {
+    background-color: #f9fafb;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: var(--text-color);
+}

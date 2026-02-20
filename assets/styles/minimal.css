@@ -1,0 +1,82 @@
+/* 极简风格：留白多、结构清晰，适合知识/阅读号 */
+
+/* H1 居中大标题 */
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: center;
+    margin: 24px 0 20px;
+    line-height: 1.5;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #95a5a6;
+}
+
+/* 段落标题 h3：块状带底色 */
+h3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #2c3e50;
+    margin: 20px 0 12px;
+    padding: 10px 14px;
+    background-color: #f8f9fa;
+    border-left: 4px solid #95a5a6;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+}
+
+/* 段落：浅底+边框 */
+p {
+    margin: 12px 0;
+    padding: 12px 16px;
+    line-height: 2;
+    color: #34495e;
+    background-color: #fcfcfc;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+/* H2 标题优化 */
+h2 {
+    font-size: 22px;
+    font-weight: 500;
+    color: #2c3e50;
+    margin-top: 32px;
+    margin-bottom: 16px;
+    line-height: 1.4;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+/* 引用块优化 */
+blockquote {
+    margin: 20px 0;
+    padding: 16px 20px;
+    background-color: #fafafa;
+    border-left: 3px solid #95a5a6;
+    color: #555;
+    font-style: normal;
+    line-height: 1.7;
+    border-radius: 0 4px 4px 0;
+}
+
+/* 图片圆角 */
+img {
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 列表样式 */
+ul, ol {
+    margin: 16px 0;
+    padding-left: 28px;
+    line-height: 2;
+}
+
+li {
+    margin: 8px 0;
+}

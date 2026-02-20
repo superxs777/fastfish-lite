@@ -1,0 +1,138 @@
+/* phycat-mint 主题（薄荷青）- 适配微信公众号格式 */
+
+/* 基础颜色变量（提取自 phycat 主题配色） */
+:root {
+    --primary-color: #10b981;
+    --text-color: #1f2937;
+    --bg-color: #ffffff;
+    --border-color: #e5e7eb;
+    --quote-bg: #f0fdf4;
+    --quote-border: #10b981;
+}
+
+/* H1 居中大标题 */
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-color);
+    text-align: center;
+    margin: 24px 0 20px;
+    line-height: 1.5;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* H2 标题优化 */
+h2 {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    line-height: 1.4;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* H3 标题 */
+h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 20px 0 12px;
+    padding: 10px 14px;
+    background-color: var(--quote-bg);
+    border-left: 4px solid var(--quote-border);
+    border-radius: 0 4px 4px 0;
+    line-height: 1.5;
+}
+
+/* 引用块优化 */
+blockquote {
+    margin: 20px 0;
+    padding: 16px 20px;
+    background-color: var(--quote-bg);
+    border-left: 4px solid var(--quote-border);
+    color: #555;
+    font-style: normal;
+    line-height: 1.7;
+    border-radius: 0 4px 4px 0;
+}
+
+/* 图片圆角 */
+img {
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+}
+
+/* 正文样式 */
+p {
+    margin: 12px 0;
+    padding: 12px 16px;
+    line-height: 2;
+    color: var(--text-color);
+    background-color: #fafafa;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+/* 列表样式 */
+ul, ol {
+    margin: 16px 0;
+    padding-left: 28px;
+    line-height: 2;
+}
+
+li {
+    margin: 8px 0;
+    color: var(--text-color);
+}
+
+/* 链接样式 */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 强调文本 */
+strong {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+em {
+    font-style: italic;
+    color: var(--text-color);
+}
+
+/* 代码样式 */
+code {
+    background-color: #f3f4f6;
+    color: var(--primary-color);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+pre {
+    background-color: #f9fafb;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: var(--text-color);
+}
