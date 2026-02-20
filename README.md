@@ -21,7 +21,7 @@ fastfish 开源精简版。提供公众号格式整理、敏感词检测（本�
 
 1. **克隆仓库**
    ```bash
-   git clone https://github.com/your-org/fastfish-lite.git
+   git clone https://github.com/superxs777/fastfish-lite.git
    cd fastfish-lite
    ```
 
@@ -71,7 +71,23 @@ fastfish 开源精简版。提供公众号格式整理、敏感词检测（本�
 - 原创度检测（千帆 API）
 - 百度内容审核
 
-**联系方式**：请通过 GitHub Issue 或您预留的渠道联系。
+## 打赏与支持
+
+一个人维护开源项目不易，深夜改 bug、周末写文档是常态。若 fastfish-lite 曾帮您省下一点时间、少踩一个坑，欢迎请我喝杯咖啡——您的每一份心意，都是支撑我继续把这件事做下去的理由。感谢。
+
+**支付宝打赏**（扫码转账，金额随意，心意无价）：
+
+![打赏二维码](assets/donate.png)
+
+---
+
+## 联系方式
+
+商业版咨询、技术交流、合作洽谈，欢迎添加微信（半日 · 山东济南）：
+
+![微信二维码](assets/contact.png)
+
+> 扫一扫上面的二维码图案，加我为朋友。
 
 ## 开源协议
 
