@@ -13,6 +13,20 @@ metadata:
 
 # fastfish-lite 能力说明
 
+**GitHub**：https://github.com/superxs777/fastfish-lite
+
+本 Skill 需配合 fastfish-lite API 服务使用。请先按下方步骤安装并启动服务，再在 OpenClaw 中启用本 Skill。
+
+## 安装 fastfish-lite（首次使用必读）
+
+1. 克隆仓库：`git clone https://github.com/superxs777/fastfish-lite.git`
+2. 进入目录：`cd fastfish-lite`
+3. 安装依赖：`pip install -r requirements.txt`
+4. 配置：`copy .env.example .env`（可选）
+5. 启动服务：`python main.py`（默认 http://127.0.0.1:8899）
+
+详细说明见 GitHub README。
+
 ## 使用方式
 
 **必须使用 JSON 参数方式调用：**
@@ -22,9 +36,10 @@ python {baseDir}/../scripts/fastfish_cli.py --json '{"command":"get-available-ar
 
 ## 前置要求
 
-1. **fastfish-lite API 服务已启动**：`python main.py`（默认 8899）
+1. **fastfish-lite 已安装并启动**：按上方「安装 fastfish-lite」完成部署，`python main.py` 监听 8899
 2. **Python 3.10+**
-3. **可选**：`MEDIA_AGENT_API_KEY` 环境变量
+3. **CLI 路径**：命令中的 `{baseDir}` 需替换为你的 fastfish-lite 安装目录下的 `openclaw-skill` 路径；若 fastfish-lite 在 `C:\fastfish-lite`，则用 `python C:\fastfish-lite\scripts\fastfish_cli.py`
+4. **可选**：`MEDIA_AGENT_API_KEY` 环境变量
 
 ## 可用能力
 
