@@ -83,7 +83,7 @@ fastfish-lite 作为 **OpenClaw Skill** 使用：将 `openclaw-skill/` 目录安
 
 **支付宝打赏**（扫码转账，金额随意，心意无价）：
 
-![打赏二维码](assets/donate.png)
+<img src="assets/donate.png" width="200" alt="打赏二维码" />
 
 ---
 
@@ -91,7 +91,7 @@ fastfish-lite 作为 **OpenClaw Skill** 使用：将 `openclaw-skill/` 目录安
 
 商业版咨询、技术交流、合作洽谈，欢迎添加微信（半日 · 山东济南）：
 
-![微信二维码](assets/contact.png)
+<img src="assets/contact.png" width="200" alt="微信二维码" />
 
 > 扫一扫上面的二维码图案，加我为朋友。
 
