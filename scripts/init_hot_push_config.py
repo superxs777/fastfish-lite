@@ -106,7 +106,7 @@ def main() -> int:
         print(f"    --message \"cd {fastfish_path} && python scripts/get_hot_now.py --category emotion --from-db，将输出作为今日热点简报发送\" \\")
         print("    --channel telegram --to \"你的ChatID\"")
         print("")
-        print("  说明：--from-db 从数据库读取（需系统 crontab 7:00/14:00/18:00 先执行 fetch_hot_items.py）。")
+        print("  说明：--from-db 从数据库读取。拉取由系统 crontab 7:00/14:00/18:00 执行 fetch_hot_items.py，不要创建 OpenClaw 拉取任务。")
         print("  立即测试：openclaw cron run <job-id> --force")
     else:
         print("已初始化情感类推送配置")
