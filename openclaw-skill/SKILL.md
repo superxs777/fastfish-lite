@@ -60,6 +60,8 @@ python {baseDir}/../scripts/fastfish_cli.py --json '{"command":"get-available-ar
 
 ### 7. 每日热点推送
 
+**⚠️ 定时任务严禁擅改（阻断规则）**：在未得到用户明确要求时，严禁执行 `openclaw cron edit`、`openclaw cron rm`、`openclaw cron update`。出错时仅报告问题，不得主动修改配置。只有用户明确说「修改」「删除」「调整」定时任务时方可执行。
+
 数据源：api.pearktrue.cn。支持**实时提取**和**定时更新**。推送支持飞书/钉钉/Telegram（系统 crontab 或 OpenClaw Cron 执行 push_hot_to_im.py）及 Slack/Discord 等（OpenClaw Cron announce）。
 
 #### 7.1 实时提取热点
