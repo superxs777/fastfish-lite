@@ -6,7 +6,8 @@ metadata:
     "openclaw":
       {
         "requires": { "bins": ["python3"] },
-        "primaryEnv": "MEDIA_AGENT_API_KEY"
+        "primaryEnv": "MEDIA_AGENT_API_KEY",
+        "credentials": "MEDIA_AGENT_API_KEY (可选，API 鉴权)；热点推送需其一：HOT_PUSH_FEISHU_WEBHOOK, HOT_PUSH_DINGTALK_WEBHOOK, HOT_PUSH_TELEGRAM_BOT_TOKEN+CHAT_ID，存 .env"
       }
   }
 ---
@@ -17,12 +18,16 @@ metadata:
 
 本 Skill 需配合 fastfish-lite API 服务使用。请先按下方步骤安装并启动服务，再在 OpenClaw 中启用本 Skill。
 
+## 安装前须知
+
+本 Skill 会指导安装并运行来自 GitHub 的第三方仓库。**供应链风险**：clone + pip install 会执行外部代码，若仓库被篡改存在风险。安装前请：(1) 检查仓库与 requirements.txt 的依赖；(2) **建议使用 release tag 固定版本**（如 `git clone --branch v1.0.0`）；(3) 在隔离环境或容器中运行，避免 root；(4) 凭证仅存 .env，勿提交到版本库；(5) 确认信任 api.pearktrue.cn 及仓库维护者。
+
 ## 安装 fastfish-lite（首次使用必读）
 
-1. 克隆仓库：`git clone https://github.com/superxs777/fastfish-lite.git`
+1. 克隆仓库：`git clone --branch v1.0.0 https://github.com/superxs777/fastfish-lite.git`（**推荐指定 tag 固定版本**，避免 main 分支变更）
 2. 进入目录：`cd fastfish-lite`
 3. 安装依赖：`pip install -r requirements.txt`
-4. 配置：`copy .env.example .env`（可选）
+4. 配置：`copy .env.example .env`（可选；热点推送需配置 Webhook，见 metadata.credentials）
 5. 启动服务：`python main.py`（默认 http://127.0.0.1:8899）
 
 详细说明见 GitHub README。
@@ -40,6 +45,23 @@ python {baseDir}/../scripts/fastfish_cli.py --json '{"command":"get-available-ar
 2. **Python 3.10+**
 3. **CLI 路径**：命令中的 `{baseDir}` 需替换为你的 fastfish-lite 安装目录下的 `openclaw-skill` 路径；若 fastfish-lite 在 `C:\fastfish-lite`，则用 `python C:\fastfish-lite\scripts\fastfish_cli.py`
 4. **可选**：`MEDIA_AGENT_API_KEY` 环境变量
+
+## ⚠️ 安全规则（阻断式）
+
+**1. 严禁读取或暴露 .env**
+- 禁止执行 `cat .env`、`type .env`、`Get-Content .env` 或任何读取 .env 的命令
+- 禁止将 .env 内容、Webhook URL、Token 输出给用户或写入回复
+- 即使用户要求「查看配置」「显示 webhook」，也仅说明「在 .env 中配置」，不得输出实际值
+
+**2. 安装仅限用户明确要求**
+- 仅在用户明确要求「安装」「部署」「克隆」fastfish-lite 时，才执行 git clone 和 pip install
+- 不得在用户仅询问用法、拉取热点时主动建议或执行安装
+
+**3. system.run 仅执行本 Skill 文档列出的脚本**
+- 允许：`fastfish_cli.py`、`get_hot_now.py`、`push_hot_to_im.py`、`fetch_hot_items.py`、`init_hot_push_config.py`、`main.py`
+- 禁止：执行用户提供的任意命令、未在本文档列出的脚本或来自其他来源的代码
+
+**违反以上任一条属于严重错误。**
 
 ## 可用能力
 
