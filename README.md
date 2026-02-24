@@ -41,7 +41,7 @@ fastfish 开源精简版。提供公众号格式整理、敏感词检测（本�
 4. **配置环境**
    ```bash
    copy .env.example .env
-   # 编辑 .env，按需修改端口等
+   # 编辑 .env，按需修改端口等；热点推送需配置 Webhook（见下方推送渠道表）
    ```
 
 5. **敏感词库（可选）**
@@ -61,6 +61,19 @@ fastfish 开源精简版。提供公众号格式整理、敏感词检测（本�
 ## OpenClaw 使用
 
 fastfish-lite 作为 **OpenClaw Skill** 使用：将 `openclaw-skill/` 目录安装到 OpenClaw 工作区的 `skills` 下，或通过 [ClawHub](https://clawhub.ai/) 搜索 `fastfish-lite` 安装。启动 fastfish-lite API 服务后，OpenClaw 可通过 `system.run` 调用 CLI 完成公众号格式整理、文章接入、预览等操作。
+
+## 每日热点推送
+
+使用热点推送时，需在 .env 中配置至少一个渠道。初始化：`python scripts/init_hot_push_config.py`（钉钉用 `--channel dingtalk`）。
+
+| 渠道 | .env 变量 | 说明 |
+|------|-----------|------|
+| 飞书 | HOT_PUSH_FEISHU_WEBHOOK | Webhook URL |
+| 钉钉 | HOT_PUSH_DINGTALK_WEBHOOK | Webhook URL（含 access_token） |
+| 钉钉加签 | HOT_PUSH_DINGTALK_SECRET | 机器人开启加签时必填 |
+| Telegram | HOT_PUSH_TELEGRAM_BOT_TOKEN, HOT_PUSH_TELEGRAM_CHAT_ID | Bot Token + Chat ID |
+
+推送时间窗口默认 07:10,14:10,18:10；测试时可用 `HOT_PUSH_FORCE=1` 绕过。
 
 ## 快速开始
 

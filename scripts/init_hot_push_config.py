@@ -3,11 +3,13 @@
 初始化每日热点推送配置。
 
 部署时执行一次，插入情感类默认配置。
+支持 --channel feishu|dingtalk|telegram|openclaw 显式指定渠道；未指定时从环境变量自动检测。
 从环境变量读取：HOT_PUSH_FEISHU_WEBHOOK、HOT_PUSH_DINGTALK_WEBHOOK，
 或 HOT_PUSH_TELEGRAM_BOT_TOKEN + HOT_PUSH_TELEGRAM_CHAT_ID。
-若均未配置，则使用 openclaw 占位（适用于仅用 OpenClaw Cron + announce 推送到 Telegram 等）。
+钉钉加签需 HOT_PUSH_DINGTALK_SECRET。若均未配置，则使用 openclaw 占位。
 """
 
+import argparse
 import json
 import os
 import sys
@@ -49,19 +51,37 @@ def _load_keywords_config() -> tuple[list[str], list[str]]:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description="初始化每日热点推送配置")
+    parser.add_argument(
+        "--channel",
+        choices=["feishu", "dingtalk", "telegram", "openclaw"],
+        default=None,
+        help="显式指定推送渠道；未指定时从 .env 自动检测",
+    )
+    args = parser.parse_args()
+
     feishu = os.getenv("HOT_PUSH_FEISHU_WEBHOOK", "").strip()
     dingtalk = os.getenv("HOT_PUSH_DINGTALK_WEBHOOK", "").strip()
     tg_token = os.getenv("HOT_PUSH_TELEGRAM_BOT_TOKEN", "").strip()
     tg_chat = os.getenv("HOT_PUSH_TELEGRAM_CHAT_ID", "").strip()
 
-    if feishu:
+    if args.channel:
+        ch = args.channel.lower()
+        if ch == "feishu":
+            webhook, im_channel = feishu, "feishu"
+        elif ch == "dingtalk":
+            webhook, im_channel = dingtalk, "dingtalk"
+        elif ch == "telegram":
+            webhook, im_channel = tg_chat, "telegram"
+        else:
+            webhook, im_channel = "openclaw://cron", "openclaw"
+    elif feishu:
         webhook, im_channel = feishu, "feishu"
     elif dingtalk:
         webhook, im_channel = dingtalk, "dingtalk"
     elif tg_token and tg_chat:
         webhook, im_channel = tg_chat, "telegram"
     else:
-        # 仅用 OpenClaw Cron + announce 时，无需配置 Webhook/Telegram
         webhook, im_channel = "openclaw://cron", "openclaw"
 
     ts = int(time.time())
@@ -109,7 +129,12 @@ def main() -> int:
         print("  说明：--from-db 从数据库读取。拉取由系统 crontab 7:00/14:00/18:00 执行 fetch_hot_items.py，不要创建 OpenClaw 拉取任务。")
         print("  立即测试：openclaw cron run <job-id> --force")
     else:
-        print("已初始化情感类推送配置")
+        ch_hint = {
+            "feishu": "HOT_PUSH_FEISHU_WEBHOOK",
+            "dingtalk": "HOT_PUSH_DINGTALK_WEBHOOK（加签需 HOT_PUSH_DINGTALK_SECRET）",
+            "telegram": "HOT_PUSH_TELEGRAM_BOT_TOKEN + HOT_PUSH_TELEGRAM_CHAT_ID",
+        }
+        print(f"已初始化情感类推送配置（渠道 {im_channel}）。Webhook 从 .env 读取，见 {ch_hint.get(im_channel, '')}")
     return 0
 
 

@@ -7,11 +7,15 @@
 
 from __future__ import annotations
 
+import base64
+import hashlib
+import hmac
 import json
 import logging
 import os
 import time
 from typing import Any
+from urllib.parse import urlencode
 
 import requests
 
@@ -303,17 +307,32 @@ def push_to_feishu(webhook_url: str, content: str) -> tuple[bool, str]:
         return False, "响应非 JSON"
 
 
+def _dingtalk_signed_url(base_url: str, secret: str) -> str:
+    """钉钉加签：生成带 timestamp 和 sign 的 URL。"""
+    timestamp = str(int(time.time() * 1000))
+    string_to_sign = f"{timestamp}\n{secret}"
+    sign = base64.b64encode(
+        hmac.new(secret.encode(), string_to_sign.encode(), hashlib.sha256).digest()
+    ).decode()
+    sep = "&" if "?" in base_url else "?"
+    return f"{base_url}{sep}{urlencode({'timestamp': timestamp, 'sign': sign})}"
+
+
 def push_to_dingtalk(webhook_url: str, content: str) -> tuple[bool, str]:
-    """推送到钉钉 Webhook。
+    """推送到钉钉 Webhook。支持加签：若配置 HOT_PUSH_DINGTALK_SECRET，每次推送动态生成签名。
 
     Returns:
         (成功与否, 错误信息)
     """
     if not webhook_url or not webhook_url.strip():
         return False, "webhook_url 为空"
+    url = webhook_url.strip()
+    secret = os.getenv("HOT_PUSH_DINGTALK_SECRET", "").strip()
+    if secret:
+        url = _dingtalk_signed_url(url, secret)
     try:
         r = requests.post(
-            webhook_url.strip(),
+            url,
             json={"msgtype": "text", "text": {"content": content}},
             timeout=10,
         )

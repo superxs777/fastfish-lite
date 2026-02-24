@@ -1,13 +1,13 @@
 ---
 name: fastfish-lite
-description: "fastfish 开源精简版。提供公众号格式整理、敏感词检测（本地）、每日热点、本地 HTML 预览。无微信发布/授权，需商业版。通过 system.run 调用 CLI。"
+description: "fastfish 开源精简版。提供公众号格式整理、敏感词检测（本地）、每日热点、本地 HTML 预览。热点推送需至少配置一个渠道的 env。无微信发布/授权，需商业版。通过 system.run 调用 CLI。"
 metadata:
   {
     "openclaw":
       {
         "requires": { "bins": ["python3"] },
         "primaryEnv": "MEDIA_AGENT_API_KEY",
-        "credentials": "MEDIA_AGENT_API_KEY (可选，API 鉴权)；热点推送需其一：HOT_PUSH_FEISHU_WEBHOOK, HOT_PUSH_DINGTALK_WEBHOOK, HOT_PUSH_TELEGRAM_BOT_TOKEN+CHAT_ID，存 .env"
+        "credentials": "MEDIA_AGENT_API_KEY (可选，API 鉴权)；热点推送至少其一：HOT_PUSH_FEISHU_WEBHOOK, HOT_PUSH_DINGTALK_WEBHOOK, HOT_PUSH_DINGTALK_SECRET(钉钉加签), HOT_PUSH_TELEGRAM_BOT_TOKEN+CHAT_ID，存 .env"
       }
   }
 ---
@@ -43,15 +43,16 @@ python {baseDir}/../scripts/fastfish_cli.py --json '{"command":"get-available-ar
 
 1. **fastfish-lite 已安装并启动**：按上方「安装 fastfish-lite」完成部署，`python main.py` 监听 8899
 2. **Python 3.10+**
-3. **CLI 路径**：命令中的 `{baseDir}` 需替换为你的 fastfish-lite 安装目录下的 `openclaw-skill` 路径；若 fastfish-lite 在 `C:\fastfish-lite`，则用 `python C:\fastfish-lite\scripts\fastfish_cli.py`
-4. **可选**：`MEDIA_AGENT_API_KEY` 环境变量
+3. **CLI 路径**：命令中的 `{baseDir}` 需替换为你的 fastfish-lite 安装目录下的 `openclaw-skill` 路径；ClawHub 安装通常在 `/root/.openclaw/workspace/fastfish-lite`，自建可用 `/opt/fastfish-lite` 或 `C:\fastfish-lite`
+4. **可选**：`MEDIA_AGENT_API_KEY` 环境变量；热点推送需在 .env 配置至少一个渠道（见 metadata.credentials）
 
 ## ⚠️ 安全规则（阻断式）
 
-**1. 严禁读取或暴露 .env**
-- 禁止执行 `cat .env`、`type .env`、`Get-Content .env` 或任何读取 .env 的命令
-- 禁止将 .env 内容、Webhook URL、Token 输出给用户或写入回复
-- 即使用户要求「查看配置」「显示 webhook」，也仅说明「在 .env 中配置」，不得输出实际值
+**1. 严禁输出或暴露 .env 中的凭证**
+- 禁止执行会输出 .env 内容的命令（如 `cat .env`、`type .env`、`Get-Content .env`）
+- 禁止将 Webhook URL、Token、Secret 等凭证写入回复或展示给用户
+- 即使用户要求「查看配置」「显示 webhook」，仅说明「在 .env 中配置」，不得输出实际值
+- **允许**：编辑 .env（写入、追加、替换用户提供的值）；运行不暴露凭证的校验（如仅返回「已配置/未配置」）
 
 **2. 安装仅限用户明确要求**
 - 仅在用户明确要求「安装」「部署」「克隆」fastfish-lite 时，才执行 git clone 和 pip install
@@ -119,7 +120,7 @@ python {baseDir}/../scripts/get_hot_now.py --source 知乎 --save
 **方式一：系统 crontab / Windows 计划任务**（飞书/钉钉/Telegram）
 
 - 每日 7:00、14:00、18:00 拉取：`python scripts/fetch_hot_items.py`
-- 每日 8:00 推送：`python scripts/push_hot_to_im.py`（.env 配置 Webhook 或 HOT_PUSH_TELEGRAM_BOT_TOKEN + HOT_PUSH_TELEGRAM_CHAT_ID）
+- 每日 8:00 推送：`python scripts/push_hot_to_im.py`（.env 配置 Webhook；钉钉加签需 HOT_PUSH_DINGTALK_SECRET。默认 push_time 07:10,14:10,18:10，测试用 HOT_PUSH_FORCE=1 绕过）
 
 **方式二：OpenClaw Cron**（飞书/钉钉/Telegram 或 Slack/Discord 等）
 
@@ -139,7 +140,7 @@ openclaw cron add --name "每日热点" --cron "10 7,14,18 * * *" --tz "Asia/Sha
 
 立即测试：创建后执行 `openclaw cron run <job-id> --force` 可立即运行一次。
 
-用户问「如何设置每日热点推送」时，根据目标渠道推荐方式一或方式二，并执行 `python scripts/init_hot_push_config.py` 初始化情感类配置。**若选 Telegram + get_hot_now（方式二）**：系统 crontab 配置 `fetch_hot_items.py` 拉取，OpenClaw 只创建「每日热点」推送任务，**不要**创建 OpenClaw 拉取任务。
+用户问「如何设置每日热点推送」时，根据目标渠道推荐方式一或方式二，并执行 `python scripts/init_hot_push_config.py`（钉钉用 `--channel dingtalk`）初始化。钉钉加签需在 .env 配置 HOT_PUSH_DINGTALK_SECRET。**若选 Telegram + get_hot_now（方式二）**：系统 crontab 配置 `fetch_hot_items.py` 拉取，OpenClaw 只创建「每日热点」推送任务，**不要**创建 OpenClaw 拉取任务。
 
 ### 不支持（需商业版）
 - `publish-article`：微信发布

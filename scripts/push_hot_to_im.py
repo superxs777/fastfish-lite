@@ -10,6 +10,7 @@
 - 单次 8 点：0 8 * * *
 """
 
+import os
 import sys
 import time
 from pathlib import Path
@@ -50,7 +51,6 @@ def main() -> int:
         log("未找到启用的推送配置，跳过")
         return 0
 
-    import os
     force = os.getenv("HOT_PUSH_FORCE", "").strip().lower() in ("1", "true", "yes")
     now = time.localtime()
     current_time = f"{now.tm_hour:02d}:{now.tm_min:02d}"
@@ -96,9 +96,18 @@ def main() -> int:
             continue
 
         content = format_push_message(items, cfg["category_name"])
+        webhook = (cfg.get("webhook_url") or "").strip()
+        if not webhook:
+            ch = (cfg.get("im_channel") or "feishu").lower()
+            if ch == "feishu":
+                webhook = os.getenv("HOT_PUSH_FEISHU_WEBHOOK", "")
+            elif ch == "dingtalk":
+                webhook = os.getenv("HOT_PUSH_DINGTALK_WEBHOOK", "")
+            elif ch == "telegram":
+                webhook = os.getenv("HOT_PUSH_TELEGRAM_CHAT_ID", "")
         ok, err = push_to_im(
             cfg.get("im_channel", "feishu"),
-            cfg.get("webhook_url", ""),
+            webhook,
             content,
         )
         item_ids = [x["id"] for x in items if x.get("id")]
